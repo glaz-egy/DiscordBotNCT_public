@@ -366,7 +366,7 @@ async def on_message(message):
         HashWord = hashlib.sha256(PassWord.encode('utf-8')).hexdigest()
         if HashWord == config['ADMINDATA']['passhash']:
             await log.Log('Bot exit')
-            await exit(0)
+            await sys.exit(0)
 
 @client.event
 async def on_member_join(member):
