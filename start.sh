@@ -1,0 +1,1 @@
+nohup python3 DiscordBotMain.py >> ../Bot.log &
