@@ -181,7 +181,7 @@ PlayFlag = False
 ErrorFlag = False
 NextFlag = False
 if len(PlayURL) == 0:
-    if sys.path.isfile('playlist.txt')
+    if sys.path.isfile('playlist.txt'):
         with open('playlist.txt', 'r') as f:
             temp = f.readlines()
         for play in temp:
