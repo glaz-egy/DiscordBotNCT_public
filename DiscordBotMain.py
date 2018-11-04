@@ -127,7 +127,7 @@ class MusicPlayer:
         else:
             player.volume = 0.3
             entry = VoiceEntry(message, player)
-            await log.MusicLog('{}{}:{}'.format(player.title, player.uploader, player.url))
+            await log.MusicLog('{}: {}'.format(player.title, player.url))
             await state.songs.put(entry)
 
     async def pause(self, message):
@@ -314,6 +314,7 @@ async def on_message(message):
                 PlayURL.append(link)
                 PlayURLs.append(link)
                 await log.MusicLog('add {}'.format(link))
+                await client.send_message(message.channel, '{} が欲しかった！'.format('https://www.youtube.com/watch?v='+link))
                 with open('playlist.txt', 'a') as f:
                     f.write('{}\n'.format(link))
             else:
@@ -341,6 +342,7 @@ async def on_message(message):
                 except:
                     pass
                 await log.MusicLog('del {}'.format(link))
+                await client.send_message(message.channel, '{} なんてもういらないよね！'.format('https://www.youtube.com/watch?v='+link))
                 with open('playlist.txt', 'w') as f:
                     for URL in PlayURL:
                         f.write('{}\n'.format(URL))
