@@ -206,6 +206,11 @@ async def NextSet(message):
     if len(PlayURLs) == 0:
         PlayURLs = deepcopy(PlayURL)
 
+async def ListOut(message):
+    await log.Log('call playlist is {}'.format(PlayURL))
+    for url in PlayURL:
+        await client.send_message(message.channel, '`https://www.youtube.com/watch?v={}`\n'.format(url))
+
 @client.event
 async def on_ready():
     await log.Log('Bot is Logging in!!')
@@ -253,6 +258,9 @@ async def on_message(message):
     if message.content.startswith('!play'):
         urlUseFlag = False
         cmd = message.content.split()
+        if 'list' in cmd:
+            await ListOut(message)
+            return
         if '-r' in cmd: RandomFlag = True
         else: RandomFlag = False
         if len(cmd) >= 2:
