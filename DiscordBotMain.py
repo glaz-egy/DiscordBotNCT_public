@@ -182,7 +182,7 @@ config = ConfigParser()
 if os.path.isfile('config.ini'):
     config.read('config.ini')
 else:
-    await log.ErrorLog('Config file not exist')
+    log.ErrorLog('Config file not exist')
     sys.exit(1)
 token = config['BOTDATA']['token']
 
