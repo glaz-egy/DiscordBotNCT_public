@@ -176,7 +176,7 @@ PauseFlag = False
 PlayFlag = False
 ErrorFlag = False
 NextFlag = False
-version = 'version: 1.2.0'
+version = 'version: 1.2.1'
 log = LogControl('bot.log')
 config = ConfigParser()
 if os.path.isfile('config.ini'):
