@@ -317,21 +317,22 @@ async def on_message(message):
         PlayFlag = False
     
     if message.content.startswith('!delmusic'):
-        link = message.content.split()[1]
-        link = link.replace('https://www.youtube.com/watch?v=', '')
-        link = link.replace('https://youtu.be/', '')
-        try:
-            PlayURL.remove(link)
+        links = message.content.split()[1:]
+        for link in links:
+            link = link.replace('https://www.youtube.com/watch?v=', '')
+            link = link.replace('https://youtu.be/', '')
             try:
-                PlayURLs.remove(link)
+                PlayURL.remove(link)
+                try:
+                    PlayURLs.remove(link)
+                except:
+                    pass
+                await log.MusicLog('del {}'.format(link))
+                with open('playlist.txt', 'w') as f:
+                    for URL in PlayURL:
+                        f.write('{}\n'.format(URL))
             except:
                 pass
-            await log.MusicLog('del {}'.format(link))
-            with open('playlist.txt', 'w') as f:
-                for URL in PlayURL:
-                    f.write('{}\n'.format(URL))
-        except:
-            pass
         
 
     if message.content.startswith('!version'):
