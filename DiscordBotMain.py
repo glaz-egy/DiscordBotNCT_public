@@ -336,7 +336,7 @@ async def on_message(message):
         
 
     if message.content.startswith('!version'):
-        version = 'version: 1.0.0'
+        version = 'version: 1.1.0'
         await log.Log(version)
         await client.send_message(message.channel, version)
 

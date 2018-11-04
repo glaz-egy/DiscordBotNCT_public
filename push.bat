@@ -1,2 +1,2 @@
-git commit -am "yeah"
+git commit -am "version up"
 git push
