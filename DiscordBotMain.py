@@ -200,7 +200,7 @@ async def NextSet(message):
     global PlayURLs
     if not RandomFlag: NowPlay = 0
     else: NowPlay = randint(0, len(PlayURLs)-1)
-    await player.play(message, song=PlayURLs[NowPlay])
+    await player.play(message, song='https://www.youtube.com/watch?v='+PlayURLs[NowPlay])
     await log.MusicLog('set {}'.format(PlayURLs[NowPlay]))
     PlayURLs.remove(PlayURLs[NowPlay])
     if len(PlayURLs) == 0:
@@ -267,7 +267,7 @@ async def on_message(message):
             music = randint(0, len(PlayURLs)-1)
             try:
                 player = MusicPlayer(client)
-                await player.play(message, song=(PlayURLs[music if RandomFlag else 0] if not urlUseFlag else url))
+                await player.play(message, song=('https://www.youtube.com/watch?v='+PlayURLs[music if RandomFlag else 0] if not urlUseFlag else url))
                 if not urlUseFlag: PlayURLs.remove(PlayURLs[music if RandomFlag else 0])
                 NowPlay = music if RandomFlag else 0
                 PlayFlag = True
@@ -315,6 +315,8 @@ async def on_message(message):
     
     if message.content.startswith('!delmusic'):
         link = message.content.split()[1]
+        link.replace('https://www.youtube.com/watch?v=', '')
+        link.replace('https://youtu.be/', '')
         try:
             PlayURL.remove(link)
             try:
