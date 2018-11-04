@@ -208,13 +208,13 @@ async def NextSet(message):
     if not RandomFlag: NowPlay = 0
     else: NowPlay = randint(0, len(PlayURLs)-1)
     await player.play(message, song='https://www.youtube.com/watch?v='+PlayURLs[NowPlay])
-    await log.MusicLog('set {}'.format(PlayURLs[NowPlay]))
+    await log.MusicLog('Set {}'.format(PlayURLs[NowPlay]))
     PlayURLs.remove(PlayURLs[NowPlay])
     if len(PlayURLs) == 0:
         PlayURLs = deepcopy(PlayURL)
 
 async def ListOut(message):
-    await log.Log('call playlist is {}'.format(PlayURL))
+    await log.Log('Call playlist is {}'.format(PlayURL))
     for url in PlayURL:
         await client.send_message(message.channel, '`https://www.youtube.com/watch?v={}`\n'.format(url))
 
@@ -295,11 +295,11 @@ async def on_message(message):
             
 
     if message.content.startswith('!next'):
-        await log.MusicLog('music skip')
+        await log.MusicLog('Music skip')
         await player.skip(message)
 
     if message.content.startswith('!stop'):
-        await log.MusicLog('music stop')
+        await log.MusicLog('Music stop')
         await player.stop(message)
         PlayFlag = False
         player = None
@@ -313,7 +313,7 @@ async def on_message(message):
             if not link in PlayURL:
                 PlayURL.append(link)
                 PlayURLs.append(link)
-                await log.MusicLog('add {}'.format(link))
+                await log.MusicLog('Add {}'.format(link))
                 await client.send_message(message.channel, '{} が欲しかった！'.format('https://www.youtube.com/watch?v='+link))
                 with open('playlist.txt', 'a') as f:
                     f.write('{}\n'.format(link))
@@ -325,7 +325,7 @@ async def on_message(message):
         await ListOut(message)
     
     if message.content.startswith('!pause'):
-        await log.MusicLog('music pause')
+        await log.MusicLog('Music pause')
         await player.pause(message)
         PauseFlag = True
         PlayFlag = False
@@ -341,7 +341,7 @@ async def on_message(message):
                     PlayURLs.remove(link)
                 except:
                     pass
-                await log.MusicLog('del {}'.format(link))
+                await log.MusicLog('Del {}'.format(link))
                 await client.send_message(message.channel, '{} なんてもういらないよね！'.format('https://www.youtube.com/watch?v='+link))
                 with open('playlist.txt', 'w') as f:
                     for URL in PlayURL:
