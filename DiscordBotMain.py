@@ -43,11 +43,6 @@ class LogControl:
         with open(self.Name, write_type) as f:
             f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S] ')+'[Music Log]'+WriteText+'\n')
 
-log = LogControl('bot.log')
-config = ConfigParser()
-config.read('config.ini')
-token = config['BOTDATA']['token']
-
 class VoiceEntry:
     def __init__(self, message, player):
         self.requester = message.author
@@ -180,6 +175,16 @@ PauseFlag = False
 PlayFlag = False
 ErrorFlag = False
 NextFlag = False
+version = 'version: 1.1.0'
+log = LogControl('bot.log')
+config = ConfigParser()
+if os.path.isfile('config.ini'):
+    config.read('config.ini')
+else:
+    log.ErrorLog('Config file not exist')
+    sys.exit(1)
+token = config['BOTDATA']['token']
+
 if len(PlayURL) == 0:
     if os.path.isfile('playlist.txt'):
         with open('playlist.txt', 'r') as f:
@@ -342,7 +347,6 @@ async def on_message(message):
         
 
     if message.content.startswith('!version'):
-        version = 'version: 1.1.0'
         await log.Log(version)
         await client.send_message(message.channel, version)
 
