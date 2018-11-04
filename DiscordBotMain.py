@@ -301,6 +301,8 @@ async def on_message(message):
                 await log.MusicLog('add {}'.format(link))
                 with open('playlist.txt', 'a') as f:
                     f.write('{}\n'.format(link))
+            else:
+                await client.send_message(message.channel, 'その曲もう入ってない？')
     
     if message.content.startswith('!musiclist'):
         await log.Log('call playlist is {}'.format(PlayURL))
