@@ -347,7 +347,8 @@ async def on_message(message):
                     for URL in PlayURL:
                         f.write('{}\n'.format(URL))
             except:
-                pass
+                await log.ErrorLog('{} not exist list'.format(link))
+                await client.send_message(message.channel, 'そんな曲入ってたかな？')
         
 
     if message.content.startswith('!version'):
