@@ -302,6 +302,7 @@ async def on_message(message):
                 with open('playlist.txt', 'a') as f:
                     f.write('{}\n'.format(link))
             else:
+                await log.MusicLog('Music Overlap {}'.format(link))
                 await client.send_message(message.channel, 'その曲もう入ってない？')
     
     if message.content.startswith('!musiclist'):
