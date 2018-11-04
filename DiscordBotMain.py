@@ -239,14 +239,15 @@ async def on_message(message):
         RoleName = message.content.split()[1]
         print(RoleName)
         role = discord.utils.get(message.author.server.roles, name=RoleName)
-        try:
-            await client.replace_roles(message.author, role)
-        except discord.HTTPException:
-            await client.add_roles(message.author, role)
-        except AttributeError:
+        if role is None:
             await client.create_role(message.server, name=RoleName, colour=discord.Colour(randint(0, 16777215)))
             role = discord.utils.get(message.author.server.roles, name=RoleName)
-            await log.Log('create role')
+            try:
+                await client.replace_roles(message.author, role)
+            except discord.HTTPException:
+                await client.add_roles(message.author, role)
+            await log.Log('create role {}'.format(RoleName))
+        else:
             try:
                 await client.replace_roles(message.author, role)
             except discord.HTTPException:
