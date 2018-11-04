@@ -115,6 +115,7 @@ class MusicPlayer:
             voice_channel = message.author.voice_channel
             if voice_channel is None:
                 await self.bot.send_message(message.channel, 'ボイスチャネルに入ってないじゃん!')
+                await log.ErrorLog('User not in voice channel')
                 return False
             state.voice = await self.bot.join_voice_channel(voice_channel)
 
@@ -181,7 +182,7 @@ config = ConfigParser()
 if os.path.isfile('config.ini'):
     config.read('config.ini')
 else:
-    log.ErrorLog('Config file not exist')
+    await log.ErrorLog('Config file not exist')
     sys.exit(1)
 token = config['BOTDATA']['token']
 
@@ -194,6 +195,7 @@ if len(PlayURL) == 0:
     else:
         with open('playlist.txt', 'w') as f:
             pass
+
 PlayURLs = deepcopy(PlayURL)
 
 client = discord.Client()
