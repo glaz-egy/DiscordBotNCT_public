@@ -33,15 +33,15 @@ class LogControl:
     
     async def Log(self, WriteText, write_type='a'):
         with open(self.Name, write_type) as f:
-            f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S] ')+'[Bot Log]'+WriteText+'\n')
+            f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S]')+'[Bot Log] '+WriteText+'\n')
     
     async def ErrorLog(self, WriteText, write_type='a'):
         with open(self.Name, write_type) as f:
-            f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S] ')+'[Error Log]'+WriteText+'\n')
+            f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S]')+'[Error Log] '+WriteText+'\n')
     
     async def MusicLog(self, WriteText, write_type='a'):
         with open(self.Name, write_type) as f:
-            f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S] ')+'[Music Log]'+WriteText+'\n')
+            f.write(datetime.now().strftime('[%Y/%m/%d %H:%M:%S]')+'[Music Log] '+WriteText+'\n')
 
 class VoiceEntry:
     def __init__(self, message, player):
@@ -176,7 +176,7 @@ PauseFlag = False
 PlayFlag = False
 ErrorFlag = False
 NextFlag = False
-version = 'version: 1.1.0'
+version = 'version: 1.2.0'
 log = LogControl('bot.log')
 config = ConfigParser()
 if os.path.isfile('config.ini'):
