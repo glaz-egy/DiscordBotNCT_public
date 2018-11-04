@@ -293,8 +293,8 @@ async def on_message(message):
     if message.content.startswith('!addmusic'):
         links = message.content.split()[1:]
         for link in links:
-            link.replace('https://www.youtube.com/watch?v=', '')
-            link.replace('https://youtu.be/', '')
+            link = link.replace('https://www.youtube.com/watch?v=', '')
+            link = link.replace('https://youtu.be/', '')
             if not link in PlayURL:
                 PlayURL.append(link)
                 PlayURLs.append(link)
@@ -315,8 +315,8 @@ async def on_message(message):
     
     if message.content.startswith('!delmusic'):
         link = message.content.split()[1]
-        link.replace('https://www.youtube.com/watch?v=', '')
-        link.replace('https://youtu.be/', '')
+        link = link.replace('https://www.youtube.com/watch?v=', '')
+        link = link.replace('https://youtu.be/', '')
         try:
             PlayURL.remove(link)
             try:
