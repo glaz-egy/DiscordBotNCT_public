@@ -19,12 +19,12 @@ CommandDict = {'`!join`': '役職を割り振ります\n一人一つの役職に
                 '`!help`' : '今見てるのに説明いる？　ヘルプ用なんだけど'}
 
 PlayCmdDict = OrderedDict()
-PlayCmdDict = {'`!play `': '音楽を再生します　`-r`を付けるとランダム再生 `$[url]`でurlを優先再生',
+PlayCmdDict = {'`!play [-r] [$url]`': '音楽を再生します　`-r`を付けるとランダム再生 `$[url]`でurlを優先再生',
                 '`!next`': '次の音楽を再生します',
                 '`!stop`': '音楽の再生をストップ＆ボイスチャネルから抜ける',
                 '`!pause`': '音楽の再生をストップ　次再生は続きから',
-                '`!addmusic [url]`': '音楽をプレイリストに追加',
-                '`!delmusic [url]`': 'プレイリストから削除',
+                '`!addmusic url [url]...`': '音楽をプレイリストに追加',
+                '`!delmusic url [url]...`': 'プレイリストから削除',
                 '`!musiclist`': 'プレイリストを確認'}
 
 class LogControl:
@@ -354,8 +354,8 @@ async def on_message(message):
     if message.content.startswith('!exit'):
         PassWord = message.content.split()[1]
         HashWord = hashlib.sha256(PassWord.encode('utf-8')).hexdigest()
-        await log.Log('Bot exit')
         if HashWord == config['ADMINDATA']['passhash']:
+            await log.Log('Bot exit')
             await exit(0)
 
 @client.event
