@@ -19,13 +19,13 @@ CommandDict = {'`!join`': '役職を割り振ります\n一人一つの役職に
                 '`!help`' : '今見てるのに説明いる？　ヘルプ用なんだけど'}
 
 PlayCmdDict = OrderedDict()
-PlayCmdDict = {'`!play [-r] [$url]`': '音楽を再生します　`-r`を付けるとランダム再生 `$[url]`でurlを優先再生',
+PlayCmdDict = {'`!play [-r] [$url] [--list]`': '音楽を再生します　`-r`を付けるとランダム再生 `$[url]`でurlを優先再生 [--list]でプレイリストを確認',
                 '`!next`': '次の音楽を再生します',
                 '`!stop`': '音楽の再生をストップ＆ボイスチャネルから抜ける',
                 '`!pause`': '音楽の再生をストップ　次再生は続きから',
                 '`!addmusic url [url]...`': '音楽をプレイリストに追加',
                 '`!delmusic url [url]...`': 'プレイリストから削除',
-                '`!musiclist`': 'プレイリストを確認'}
+                '`!musiclist`': 'プレイリストを確認(廃止予定)'}
 
 class LogControl:
     def __init__(self, FileName):
@@ -258,7 +258,7 @@ async def on_message(message):
     if message.content.startswith('!play'):
         urlUseFlag = False
         cmd = message.content.split()
-        if 'list' in cmd:
+        if '--list' in cmd:
             await ListOut(message)
             return
         if '-r' in cmd: RandomFlag = True
@@ -314,9 +314,7 @@ async def on_message(message):
                 await client.send_message(message.channel, 'その曲もう入ってない？')
     
     if message.content.startswith('!musiclist'):
-        await log.Log('call playlist is {}'.format(PlayURL))
-        for url in PlayURL:
-            await client.send_message(message.channel, '`https://www.youtube.com/watch?v={}`\n'.format(url))
+        await ListOut(message)
     
     if message.content.startswith('!pause'):
         await log.MusicLog('music pause')
