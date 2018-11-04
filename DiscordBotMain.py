@@ -303,9 +303,8 @@ async def on_message(message):
                     f.write('{}\n'.format(link))
     
     if message.content.startswith('!musiclist'):
-        await log.Log('call playlist is ')
+        await log.Log('call playlist is {}'.format(PlayURL))
         for url in PlayURL:
-            print('{}'.format(url))
             await client.send_message(message.channel, '`https://www.youtube.com/watch?v={}`\n'.format(url))
     
     if message.content.startswith('!pause'):
