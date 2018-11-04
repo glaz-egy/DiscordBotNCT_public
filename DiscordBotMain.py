@@ -293,6 +293,8 @@ async def on_message(message):
     if message.content.startswith('!addmusic'):
         links = message.content.split()[1:]
         for link in links:
+            link.replace('https://www.youtube.com/watch?v=', '')
+            link.replace('https://youtu.be/', '')
             if not link in PlayURL:
                 PlayURL.append(link)
                 PlayURLs.append(link)
@@ -301,11 +303,10 @@ async def on_message(message):
                     f.write('{}\n'.format(link))
     
     if message.content.startswith('!musiclist'):
-        print('call playlist is ')
+        await log.Log('call playlist is ')
         for url in PlayURL:
-            #title = BeautifulSoup(urlopen(url).read(), 'lxml').findAll('span', id = 'eow-title')[0].get('title')
             print('{}'.format(url))
-            await client.send_message(message.channel, '`{}`\n'.format(url))
+            await client.send_message(message.channel, '`https://www.youtube.com/watch?v={}`\n'.format(url))
     
     if message.content.startswith('!pause'):
         await log.MusicLog('music pause')
@@ -337,9 +338,11 @@ async def on_message(message):
         await client.send_message(message.channel, version)
 
     if message.content.startswith('!help'):
-        if message.content.split()[1] == 'play':
-            for key, value in PlayCmdDict.items():
-                await client.send_message(message.channel, '{}: {}'.format(key, value))
+        cmd = message.content.split()
+        if len(cmd) > 1:
+            if cmd[1] == 'play':
+                for key, value in PlayCmdDict.items():
+                    await client.send_message(message.channel, '{}: {}'.format(key, value))
         else:
             for key, value in CommandDict.items():
                 await client.send_message(message.channel, '{}: {}'.format(key, value))
