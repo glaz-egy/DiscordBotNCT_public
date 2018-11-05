@@ -215,8 +215,12 @@ async def NextSet(message):
 
 async def ListOut(message):
     await log.Log('Call playlist is {}'.format(PlayURL))
+    URLs = ''
     for url in PlayURL:
-        await client.send_message(message.channel, '`https://www.youtube.com/watch?v={}`\n'.format(url))
+        URLs += 'youtube.com/watch?v='+url+'\n'
+    embed = discord.Embed(colour=0x708090)
+    embed.add_field(name='曲リスト', value=URLs, inline=True)
+    await client.send_message(message.channel, embed=embed)
 
 @client.event
 async def on_ready():
