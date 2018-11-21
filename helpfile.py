@@ -51,7 +51,7 @@ CommandDictJP['spell'] = {'`'+prefix+'spell option`': '`呪文用のコマンド
                         '`--add-line SpellName`': '呪文を追加します 呪文名 と一緒に入力した後 一節ずつ入力してください',
                         '`--del SpellName`': '呪文を削除します'}
 
-CommandDictJP['study'] = {'`'+prefix+'study`': '勉強用のコマンド',
+CommandDictJP['study'] = {'`'+prefix+'study option`': '勉強用のコマンド',
                         '`--list-subject`': '科目を確認します',
                         '`--list-unit Subject`': '単元を確認します',
                         '`--list-ques Subject Unit`': '問題を確認します',
