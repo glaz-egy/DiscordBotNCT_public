@@ -28,6 +28,7 @@ CommandDictJP['help'] = { '`'+prefix+'join`': '`{}join 高専名`で各高専の
 CommandDictJP['music'] = {'`'+prefix+'music option`': '音楽関連のコマンドです',
                         '`-r`': 'ランダム再生を有効にします `--next`または`--play`と同時に使ってもOK',
                         '`-n`': 'ランダム再生を無効にします 同上',
+                        '`--play`': '音楽を再生します',
                         '`--list`': 'プレイリストを確認します',
                         '`--list-all`': '全てのプレイリストを確認します',
                         '`--list-list`': 'プレイリストのリストを確認します',
