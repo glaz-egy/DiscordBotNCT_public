@@ -362,10 +362,11 @@ async def on_message(message):
             SpellDataG = []
     if message.content.startswith(prefix+'join'):
         RoleName = message.content.split()[1]
+        if RoleName[-2:] == '高専': RoleName = RoleName.replace('高専', '')
         print(RoleName)
         role = discord.utils.get(message.author.server.roles, name=RoleName)
         if role is None:
-            await client.create_role(message.server, name=RoleName, colour=discord.Colour(randint(0, 16777215)))
+            await client.create_role(message.server, name=RoleName, colour=discord.Colour(randint(0, 16777215)), hoist=True)
             role = discord.utils.get(message.author.server.roles, name=RoleName)
             try:
                 await client.replace_roles(message.author, role)
@@ -379,13 +380,13 @@ async def on_message(message):
                 await client.add_roles(message.author, role)
         rand = random()
         if rand <= 0.25:
-            await client.send_message(message.channel, '**{}** は{}高専のフレンズなんだね！'.format(message.author.name, RoleName))
+            await client.send_message(message.channel, '**{}** は{}のフレンズなんだね！'.format(message.author.name, RoleName+'高専' if not RoleName in '高専' else RoleName))
         elif rand <= 0.50:
-            await client.send_message(message.channel, '**{}** が{}高専に join をくりだした！'.format(message.author.name, RoleName))
+            await client.send_message(message.channel, '**{}** が{}に join をくりだした！'.format(message.author.name, RoleName+'高専' if not RoleName in '高専' else RoleName))
         elif rand <= 0.75:
-            await client.send_message(message.channel, '**{}** が{}高専に入ったよ！ やったね！'.format(message.author.name, RoleName))
+            await client.send_message(message.channel, '**{}** が{}に入ったよ！ やったね！'.format(message.author.name, RoleName+'高専' if not RoleName in '高専' else RoleName))
         else:
-            await client.send_message(message.channel, '**{}** さてはおめー{}高専だな！'.format(message.author.name, RoleName))
+            await client.send_message(message.channel, '**{}** さてはおめー{}だな！'.format(message.author.name, RoleName+'高専' if not RoleName in '高専' else RoleName))
         await log.Log('Role set {}:{}'.format(message.author.name, RoleName))
     elif message.content.startswith(prefix+'music'):
         urlUseFlag = False
